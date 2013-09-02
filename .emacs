@@ -2,7 +2,7 @@
 (require 'package)
 (add-to-list 'package-archives
     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
+;;test
 
 (autoload 'multi-term "multi-term" nil t)
 (autoload 'multi-term-next "multi-term" nil t)
