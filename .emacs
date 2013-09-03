@@ -1,24 +1,12 @@
 (require 'erc)
 (require 'package)
-(add-to-list 'load-path "~/.emacs.d/elpa/emms-20130821.1048/")
-        (require 'emms-setup)
-        (emms-standard)
-        (emms-default-players)
-        
-
 (add-to-list 'package-archives
     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(setq display-time-day-and-date t
+                display-time-24hr-format t)
+             (display-time)
 
-(unless (require 'el-get nil t)
-  (url-retrieve
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s)
-     (end-of-buffer)
-     (eval-print-last-sexp))))
-
-(autoload 'wl "wl" "Wanderlust" t)
 (autoload 'multi-term "multi-term" nil t)
 (autoload 'multi-term-next "multi-term" nil t)
 
@@ -32,15 +20,7 @@
 
 (global-set-key (kbd "C-c t") 'multi-term-next)
 (global-set-key (kbd "C-c T") 'multi-term) ;; create a new one
-(defun toggle-fullscreen ()
-  "Toggle full screen on X11"
-  (interactive)
-  (when (eq window-system 'x)
-    (set-frame-parameter
-     nil 'fullscreen
-     (when (not (frame-parameter nil 'fullscreen)) 'fullboth))))
 
-(global-set-key [f11] 'toggle-fullscreen)
 
 ;; joining && autojoing
 
@@ -66,7 +46,7 @@
       
 (erc-autojoin-mode t)
 (setq erc-autojoin-channels-alist
-  '((".*\\freenode.net" "#html5" "#perl")))
+  '((".*\\freenode.net" "#html5")))
 
 ;; switch to ERC with Ctrl+c e
 (global-set-key (kbd "C-c e") 'djcb-erc-start-or-switch) ;; ERC
@@ -77,12 +57,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
- '(custom-enabled-themes (quote (tsdh-dark)))
- '(erc-interpret-mirc-color t)
- '(erc-join-buffer (quote buffer))
- '(inhibit-startup-screen t)
- '(initial-buffer-choice "~/")
- '(mew-imap-user "dmann@topsy.com"))
+ '(custom-enabled-themes (quote (wheatgrass)))
+ '(erc-away-nickname "dmann_away")
+ '(erc-modules (quote (autojoin button completion fill irccontrols keep-place list match menu move-to-prompt netsplit networks noncommands notify notifications readonly ring smiley sound stamp track)))
+ '(erc-reuse-buffers t)
+ '(erc-reuse-frames nil)
+ '(ido-mode (quote both) nil (ido))
+ '(uniquify-buffer-name-style (quote post-forward) nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
