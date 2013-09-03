@@ -1,9 +1,24 @@
 (require 'erc)
 (require 'package)
+(add-to-list 'load-path "~/.emacs.d/elpa/emms-20130821.1048/")
+        (require 'emms-setup)
+        (emms-standard)
+        (emms-default-players)
+        
+
 (add-to-list 'package-archives
     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;;test
 
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+   (lambda (s)
+     (end-of-buffer)
+     (eval-print-last-sexp))))
+
+(autoload 'wl "wl" "Wanderlust" t)
 (autoload 'multi-term "multi-term" nil t)
 (autoload 'multi-term-next "multi-term" nil t)
 
@@ -17,7 +32,15 @@
 
 (global-set-key (kbd "C-c t") 'multi-term-next)
 (global-set-key (kbd "C-c T") 'multi-term) ;; create a new one
+(defun toggle-fullscreen ()
+  "Toggle full screen on X11"
+  (interactive)
+  (when (eq window-system 'x)
+    (set-frame-parameter
+     nil 'fullscreen
+     (when (not (frame-parameter nil 'fullscreen)) 'fullboth))))
 
+(global-set-key [f11] 'toggle-fullscreen)
 
 ;; joining && autojoing
 
@@ -56,7 +79,10 @@
  '(ansi-color-names-vector ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(erc-interpret-mirc-color t)
- '(erc-join-buffer (quote buffer)))
+ '(erc-join-buffer (quote buffer))
+ '(inhibit-startup-screen t)
+ '(initial-buffer-choice "~/")
+ '(mew-imap-user "dmann@topsy.com"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
